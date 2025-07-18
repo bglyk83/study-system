@@ -27,14 +27,15 @@
 <h3>내가 만든 스터디</h3>
 <ul>
     <li th:if="${#lists.isEmpty(myStudies)}" class="none">없음</li>
-    <li th:each="study : ${myStudies}" th:text="'ID: ' + ${study.id} + ' / 제목: ' + ${study.title}"></li>
+    <li th:each="study : ${myStudies}" th:text="'ID: ' + ${study.id} + ' / 이름: ' + ${study.title} + ' / 생성자: ' + ${study.creatorName}"></li>
 </ul>
 <h3>내가 신청한 스터디</h3>
 <ul>
     <li th:if="${#lists.isEmpty(myApplications)}" class="none">없음</li>
     <li th:each="app : ${myApplications}">
         <span th:text="'ID: ' + ${app.studyId}"></span>
-        <span th:if="${app.studyTitle != null}" th:text="' / 제목: ' + ${app.studyTitle}"></span>
+        <span th:if="${app.studyTitle != null}" th:text="' / 이름: ' + ${app.studyTitle}"></span>
+        <span th:if="${app.creatorName != null}" th:text="' / 생성자: ' + ${app.creatorName}"></span>
     </li>
 </ul>
 <a th:href="@{/}">메인으로</a>
