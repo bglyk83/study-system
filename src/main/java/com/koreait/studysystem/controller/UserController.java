@@ -48,6 +48,13 @@ public class UserController {
         User user = userService.findByUsername(username);
         // 내가 만든 스터디는 findByCreatorId로 조회
         List<Study> myStudies = studyService.findByCreatorId(user.getId());
+        // 각 Study에 creatorName 세팅
+        for (Study study : myStudies) {
+            User creator = userService.findById(study.getCreatorId());
+            if (creator != null) {
+                study.setCreatorName(creator.getName());
+            }
+        }
         List<StudyApplication> myApplications = studyApplicationService.findByUserId(user.getId());
         for (StudyApplication app : myApplications) {
             Study study = studyService.findById(app.getStudyId());
