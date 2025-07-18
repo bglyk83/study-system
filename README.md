@@ -29,7 +29,7 @@ study-system/
 │       │       └── service/               # 서비스 계층 (인터페이스/구현체)
 │       ├── resources/
 │       │   ├── mapper/                    # MyBatis XML 매퍼
-│       │   ├── templates/                 # Thymeleaf HTML
+│       │   ├── templates/                 # HTML
 │       │   └── application.yml            # 환경설정 (gitignore)
 ├── build.gradle
 ├── README.md
