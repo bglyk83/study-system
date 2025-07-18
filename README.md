@@ -17,7 +17,7 @@
 
 ## 실행 방법
 1. `database.sql`로 MySQL DB 생성 및 테이블 세팅
-2. `application.yml`(또는 `application.properties`)에 DB 정보 입력 (이 파일은 git에 포함하지 마세요)
+2. `application.yml`(또는 `application.properties`)에 DB 정보 입력 
 
 3. Gradle 빌드 및 실행
 
@@ -25,11 +25,7 @@
 ./gradlew bootRun
 ```
 
-## 주의사항
-- `application.yml`, `.env` 등 민감 정보는 git에 포함하지 않습니다.
-- 쿼리는 `database.sql`에 포함되어 있습니다.
-
-## 요구사항 요약
+## 주요 기능 요약
 - 로그인한 사용자만 스터디 개설/신청/마이페이지 접근 가능
 - 비밀번호는 BCrypt로 암호화
 - 동일 스터디 중복 신청 불가, 정원 초과 시 신청 불가 
