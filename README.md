@@ -13,7 +13,7 @@
 - MyBatis
 - MySQL
 - Gradle
-- HTML (Thymeleaf 최소 사용)
+- HTML
 
 ## 실행 방법
 1. `database.sql`로 MySQL DB 생성 및 테이블 세팅
