@@ -15,6 +15,28 @@
 - Gradle
 - HTML
 
+## 폴더 구조
+```
+study-system/
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── com/koreait/studysystem/
+│       │       ├── config/                # Spring 설정, 시큐리티, MyBatis 등
+│       │       ├── controller/            # 웹 컨트롤러
+│       │       ├── entity/                # 엔티티(도메인)
+│       │       ├── repository/            # MyBatis 매퍼(Repository)
+│       │       └── service/               # 서비스 계층 (인터페이스/구현체)
+│       ├── resources/
+│       │   ├── mapper/                    # MyBatis XML 매퍼
+│       │   ├── templates/                 # Thymeleaf HTML
+│       │   └── application.yml            # 환경설정 (gitignore)
+├── build.gradle
+├── README.md
+├── .gitignore
+├── database.sql
+```
+
 ## 실행 방법
 1. `database.sql`로 MySQL DB 생성 및 테이블 세팅
 2. `application.yml`(또는 `application.properties`)에 DB 정보 입력 
