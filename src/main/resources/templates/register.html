@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원가입</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+        .container { max-width: 400px; margin: 60px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 32px; }
+        h2 { color: #2d3a4b; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        form { margin-top: 24px; }
+        label { display: block; margin-bottom: 16px; color: #333; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { width: 100%; background: #1976d2; color: #fff; border: none; padding: 10px; border-radius: 4px; font-size: 16px; cursor: pointer; margin-top: 12px; }
+        button:hover { background: #125ea2; }
+        a { color: #1976d2; text-decoration: none; display: block; margin-top: 18px; text-align: right; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+<h2>회원가입</h2>
+<form th:action="@{/register}" method="post">
+    <label>아이디: <input type="text" name="username" required></label>
+    <label>이름: <input type="text" name="name" required></label>
+    <label>비밀번호: <input type="password" name="password" required></label>
+    <button type="submit">가입</button>
+</form>
+<a th:href="@{/login}">로그인</a>
+</div>
+</body>
+</html> 

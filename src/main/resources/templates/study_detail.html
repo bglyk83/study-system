@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>스터디 상세</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+        .container { max-width: 500px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 32px; }
+        h2 { color: #2d3a4b; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        .info { margin-bottom: 24px; }
+        .label { color: #888; font-weight: bold; }
+        form { margin-top: 24px; }
+        button { background: #1976d2; color: #fff; border: none; padding: 10px 24px; border-radius: 4px; font-size: 16px; cursor: pointer; }
+        button:disabled { background: #bbb; cursor: not-allowed; }
+        button:hover:enabled { background: #125ea2; }
+        a { color: #1976d2; text-decoration: none; margin-top: 24px; display: inline-block; }
+        a:hover { text-decoration: underline; }
+        .error { color: #d32f2f; margin-bottom: 16px; font-weight: bold; }
+        .mine { color: #388e3c; font-weight: bold; margin-bottom: 12px; }
+        .participants { margin: 10px 0 0 0; padding: 0; }
+        .participants li { display: inline-block; margin-right: 8px; color: #1976d2; }
+        .participants-title { color: #888; font-size: 14px; margin-top: 8px; }
+        .applied { color: #d32f2f; font-weight: bold; margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+<div class="container">
+<h2>스터디 상세</h2>
+<div th:if="${param.error}">
+    <p class="error" th:text="${param.error == 'duplicate' ? '이미 신청한 스터디입니다.' : (param.error == 'full' ? '모집 정원이 초과되었습니다.' : '')}"></p>
+</div>
+<div class="info">
+    <span class="label">제목:</span> <span th:text="${study.title}"></span><br>
+    <span class="label">설명:</span> <span th:text="${study.description}"></span><br>
+    <span class="label">모집인원:</span> <span th:text="${study.maxMember}"></span><br>
+    <span class="label">마감일:</span> <span th:text="${#dates.format(study.deadline, 'yyyy-MM-dd')}"></span><br>
+    <span class="label">작성자:</span> <span th:text="${study.creatorName}"></span><br>
+    <span class="participants-title">참여 인원 (<span th:text="${participantCount}"></span>명):</span>
+    <ul class="participants">
+        <li th:each="name : ${participantNames}" th:text="${name}"></li>
+        <li th:if="${#lists.isEmpty(participantNames)}" style="color:#bbb;">없음</li>
+    </ul>
+</div>
+<div th:if="${loginUser != null and study.creatorId == loginUser.id}">
+    <p class="mine">내가 만든 스터디입니다.</p>
+</div>
+<div th:if="${alreadyApplied}">
+    <p class="applied">신청한 스터디입니다.</p>
+</div>
+<div th:if="${isFull}">
+    <p class="applied">현재 스터디 인원 모집이 마감되었습니다.</p>
+</div>
+<form th:action="@{'/study/' + ${study.id} + '/apply'}" method="post">
+    <button type="submit"
+            th:disabled="${loginUser != null and study.creatorId == loginUser.id or alreadyApplied or isFull}">신청하기</button>
+</form>
+<a th:href="@{/}">목록으로</a>
+</div>
+</body>
+</html> 

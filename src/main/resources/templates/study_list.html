@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>스터디 목록</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+        .container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 32px; }
+        h2 { color: #2d3a4b; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        form { margin-bottom: 24px; }
+        input[type="text"] { padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 200px; }
+        button { background: #1976d2; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; font-size: 15px; cursor: pointer; }
+        button:hover { background: #125ea2; }
+        a { color: #1976d2; text-decoration: none; margin: 0 8px; }
+        a:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
+        th { background: #f0f4f8; color: #333; }
+        tr:last-child td { border-bottom: none; }
+        .paging { margin-top: 18px; color: #888; }
+    </style>
+</head>
+<body>
+<div class="container">
+<h2>스터디 목록</h2>
+<form th:action="@{/}" method="get">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="제목/작성자 검색">
+    <button type="submit">검색</button>
+</form>
+<a th:href="@{/study/create}">스터디 개설</a> |
+<a th:href="@{/mypage}">마이페이지</a> |
+<a th:href="@{/logout}">로그아웃</a>
+<table>
+    <tr>
+        <th>제목</th><th>설명</th><th>작성자</th><th>참여 인원</th><th>모집 인원</th><th>마감일</th><th>상세</th>
+    </tr>
+    <tr th:each="study : ${studies}">
+        <td th:text="${study.title}"></td>
+        <td th:text="${study.description}"></td>
+        <td th:text="${study.creatorName}"></td>
+        <td th:text="${study.currentCount != null ? study.currentCount : 0}"></td>
+        <td th:text="${study.maxMember}"></td>
+        <td th:text="${#dates.format(study.deadline, 'yyyy-MM-dd')}"></td>
+        <td><a th:href="@{'/study/' + ${study.id}}">보기</a></td>
+    </tr>
+</table>
+<div class="paging">
+    <span th:text="'페이지: ' + ${page}"></span>
+</div>
+</div>
+</body>
+</html> 

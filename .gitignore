@@ -1,0 +1,24 @@
+# Gradle
+/build/
+/.gradle/
+
+# IDE
+/.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# 환경설정/민감정보
+application.properties
+application.yml
+.env
+
+# 기타
+out/ 

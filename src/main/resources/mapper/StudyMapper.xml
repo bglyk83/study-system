@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.studysystem.repository.StudyRepository">
+    <insert id="insertStudy" parameterType="com.koreait.studysystem.entity.Study">
+        INSERT INTO study (title, description, max_member, deadline, creator_id)
+        VALUES (#{title}, #{description}, #{maxMember}, #{deadline}, #{creatorId})
+    </insert>
+
+    <select id="findById" parameterType="long" resultType="com.koreait.studysystem.entity.Study">
+        SELECT id, title, description, max_member AS maxMember, deadline, creator_id AS creatorId
+        FROM study WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultType="com.koreait.studysystem.entity.Study">
+        SELECT id, title, description, max_member AS maxMember, deadline, creator_id AS creatorId
+        FROM study ORDER BY id DESC LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="search" resultType="com.koreait.studysystem.entity.Study">
+        SELECT id, title, description, max_member AS maxMember, deadline, creator_id AS creatorId
+        FROM study
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+           OR creator_id IN (SELECT id FROM user WHERE name LIKE CONCAT('%', #{keyword}, '%'))
+        ORDER BY id DESC LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*) FROM study
+    </select>
+
+    <select id="countSearch" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM study
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+           OR creator_id IN (SELECT id FROM user WHERE name LIKE CONCAT('%', #{keyword}, '%'))
+    </select>
+
+    <select id="countApplications" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM study_application WHERE study_id = #{studyId}
+    </select>
+
+    <select id="findByCreatorId" parameterType="long" resultType="com.koreait.studysystem.entity.Study">
+        SELECT id, title, description, max_member AS maxMember, deadline, creator_id AS creatorId
+        FROM study WHERE creator_id = #{creatorId} ORDER BY id DESC
+    </select>
+</mapper> 
